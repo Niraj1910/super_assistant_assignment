@@ -43,7 +43,7 @@ const ItemsSection = ({
   };
 
   return (
-    <div className="mb-4">
+    <div key={Date.now()} className="mb-4">
       <div className="flex justify-between">
         <label className="block text-lg font-semibold mb-2">Item</label>
         <label className="block text-lg font-semibold mr-24 mb-2">
@@ -51,8 +51,9 @@ const ItemsSection = ({
         </label>
       </div>
 
-      {currCategory.items.map((currItem) => (
+      {currCategory.items.map((currItem, index) => (
         <Item
+          key={Date.now().toString() + `${index}`}
           currCategory={currCategory}
           setCurrCategory={setCurrCategory}
           handleDrop={handleDrop}
