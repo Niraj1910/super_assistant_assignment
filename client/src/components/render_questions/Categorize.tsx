@@ -24,7 +24,7 @@ const Categorize = () => {
         <div className="w-1/3">
           <h2 className="text-lg font-semibold mb-2">Items</h2>
           <div className="space-y-2">
-            {items.map((item) => (
+            {items?.map((item) => (
               <div
                 key={item}
                 draggable
@@ -39,7 +39,7 @@ const Categorize = () => {
 
         {/* Categories Section */}
         <div className="flex-1 grid grid-cols-2 gap-4">
-          {categories.map((category) => (
+          {categories?.map((category) => (
             <div
               key={category}
               onDragOver={(e) => e.preventDefault()}
@@ -55,7 +55,7 @@ const Categorize = () => {
                   .filter(
                     ([, assignedCategory]) => assignedCategory === category
                   )
-                  .map(([item]) => (
+                  ?.map(([item]) => (
                     <div key={item} className="p-2 bg-white rounded shadow">
                       {item}
                     </div>

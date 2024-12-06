@@ -32,7 +32,7 @@ const ComprehensionCreate = () => {
       />
       {comprehensionQuestions &&
         comprehensionQuestions.length &&
-        comprehensionQuestions.map((comprehension) => (
+        comprehensionQuestions?.map((comprehension) => (
           <ComprehensionQuestions
             key={comprehension._id}
             comprehensionQuestion={comprehensionQuestions}

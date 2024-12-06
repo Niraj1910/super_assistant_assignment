@@ -27,7 +27,7 @@ export const saveComprehensionData = async (
       newQuestion = { _id: id, ...newQuestion };
     } else {
       // Remove the _id from each question
-      const sanitizedQuestions = questions.map(({ _id, ...rest }) => rest);
+      const sanitizedQuestions = questions?.map(({ _id, ...rest }) => rest);
       newQuestion.questions = sanitizedQuestions;
     }
 

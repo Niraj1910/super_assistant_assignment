@@ -49,7 +49,7 @@ const ComprehensionQuestions: React.FC<ComprehensionProps> = ({
 
   const handleAddOption = (questionId: string) => {
     setQuestions((prev) =>
-      prev.map((q) =>
+      prev?.map((q) =>
         q._id === questionId ? { ...q, options: [...q.options, ""] } : q
       )
     );
@@ -57,7 +57,7 @@ const ComprehensionQuestions: React.FC<ComprehensionProps> = ({
 
   const handleDeleteOption = (questionId: string, optionIndex: number) => {
     setQuestions((prev) =>
-      prev.map((q) =>
+      prev?.map((q) =>
         q._id === questionId
           ? {
               ...q,
@@ -81,7 +81,7 @@ const ComprehensionQuestions: React.FC<ComprehensionProps> = ({
           />
         </div>
 
-        {questions.map((q, index) => (
+        {questions?.map((q, index) => (
           <div key={q._id} className="mb-6 border p-4 bg-gray-50 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <textarea
@@ -111,7 +111,7 @@ const ComprehensionQuestions: React.FC<ComprehensionProps> = ({
               </button>
             </div>
 
-            {q.options.map((option, idx) => (
+            {q.options?.map((option, idx) => (
               <Options
                 key={`${q._id}-option-${idx}`}
                 option={option}

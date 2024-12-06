@@ -72,7 +72,7 @@ const Comprehension = () => {
 
       {/* Questions */}
       <div className="space-y-4">
-        {questions.map((question) => (
+        {questions?.map((question) => (
           <div key={question.id} className="border rounded-md p-4">
             {/* Question header */}
             <div
@@ -88,7 +88,7 @@ const Comprehension = () => {
             {/* Render options only if the question is expanded */}
             {expandedQuestion === question.id && (
               <div className="space-y-2 mt-4">
-                {question.options.map((option, index) => (
+                {question.options?.map((option, index) => (
                   <div key={index} className="flex items-center">
                     <input
                       type="radio"

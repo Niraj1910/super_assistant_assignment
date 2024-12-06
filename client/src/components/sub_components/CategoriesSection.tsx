@@ -38,7 +38,7 @@ const CategoriesSection = ({
   return (
     <div key={crypto.randomUUID()} className="mb-4">
       <label className="block text-lg font-semibold mb-2">Categories</label>
-      {currCategory.categories.map((category) => (
+      {currCategory.categories?.map((category) => (
         <div key={category} className="flex items-center mb-2">
           <input
             type="text"

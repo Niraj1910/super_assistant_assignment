@@ -140,7 +140,7 @@ const ClozeCreate = () => {
 
           <div className="mb-6">
             <label className="block text-lg font-semibold mb-2">Options</label>
-            {options.map((option, index) => (
+            {options?.map((option, index) => (
               <div key={option.id} className="flex items-center mb-2">
                 <input
                   type="checkbox"

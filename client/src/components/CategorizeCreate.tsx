@@ -37,7 +37,7 @@ const CategorizeCreate = () => {
       {/* Main Content: Left (Question Section) and Right (Add/Delete Buttons) */}
       {categoryQuestions &&
         categoryQuestions.length > 0 &&
-        categoryQuestions.map((category, idx) => (
+        categoryQuestions?.map((category, idx) => (
           <CategoryQuestion
             key={category._id}
             category={category}

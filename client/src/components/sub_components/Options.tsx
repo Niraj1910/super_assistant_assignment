@@ -39,9 +39,9 @@ const Options = ({
         value={option}
         onChange={(e) => {
           const updatedQuestions = [...questions];
-          updatedQuestions[index].options = updatedQuestions[index].options.map(
-            (opt) => (opt === option ? e.target.value : opt)
-          );
+          updatedQuestions[index].options = updatedQuestions[
+            index
+          ].options?.map((opt) => (opt === option ? e.target.value : opt));
           setQuestions(updatedQuestions);
         }}
         placeholder="Option"

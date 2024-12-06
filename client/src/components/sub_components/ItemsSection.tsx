@@ -51,7 +51,7 @@ const ItemsSection = ({
         </label>
       </div>
 
-      {currCategory.items.map((currItem, index) => (
+      {currCategory.items?.map((currItem, index) => (
         <Item
           key={Date.now().toString() + `${index}`}
           currCategory={currCategory}

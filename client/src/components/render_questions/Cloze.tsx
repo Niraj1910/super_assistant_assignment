@@ -52,7 +52,7 @@ const Cloze = () => {
       <h2 className="text-lg font-semibold mb-4">Cloze Question</h2>
       <div className="mb-4">
         <p className="text-lg">
-          {sentence.split(" ").map((word, index) => {
+          {sentence.split(" ")?.map((word, index) => {
             if (word === "___") {
               const blankId = index + 1;
               return (
@@ -72,7 +72,7 @@ const Cloze = () => {
       </div>
 
       <div className="flex gap-4">
-        {options.map((option) => (
+        {options?.map((option) => (
           <div
             key={option.id}
             draggable

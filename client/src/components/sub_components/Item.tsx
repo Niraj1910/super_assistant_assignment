@@ -67,7 +67,7 @@ const Item: React.FC<ItemProps> = ({
         onChange={() => {}}
         className="ml-2 p-2 border rounded-md"
       >
-        {currCategory.categories.map((category) => (
+        {currCategory.categories?.map((category) => (
           <option key={category} value={category}>
             {category}
           </option>
