@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
 import Container from "../Container";
 
 const Cloze = () => {
@@ -12,11 +12,28 @@ const Cloze = () => {
     2: "",
   });
 
-  const handleDragStart = (e, option) => {
+  // temperory will change later on
+  useCallback(() => {
+    setSentence("A quick ___ fox jumped over a ___");
+    setOptions([
+      { id: 1, value: "brown", enabled: true },
+      { id: 2, value: "fence", enabled: true },
+    ]);
+    console.log(answers);
+  }, []);
+
+  const handleDragStart = (
+    e: React.DragEvent,
+    option: {
+      id: number;
+      value: string;
+      enabled: boolean;
+    }
+  ) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(option));
   };
 
-  const handleDrop = (e, blankId) => {
+  const handleDrop = (e: React.DragEvent, blankId: number) => {
     e.preventDefault();
     const droppedOption = JSON.parse(e.dataTransfer.getData("text/plain"));
 
@@ -26,7 +43,7 @@ const Cloze = () => {
     }));
   };
 
-  const handleDragOver = (e) => {
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
 
@@ -45,7 +62,7 @@ const Cloze = () => {
                   onDragOver={handleDragOver}
                   className="inline-block w-20 h-8 border-b-2 border-gray-400 text-center mx-1 cursor-pointer"
                 >
-                  {answers[blankId] || ""}
+                  {""}
                 </span>
               );
             }

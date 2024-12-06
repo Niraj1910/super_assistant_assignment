@@ -2,7 +2,7 @@ import { useState } from "react";
 import Points from "./Points";
 import CategoriesSection from "./CategoriesSection";
 import ItemsSection from "./ItemsSection";
-import SideButtons from "./SideButtons";
+// import SideButtons from "./SideButtons";
 
 interface CategoryQuestionProps {
   idx: number;
@@ -11,12 +11,7 @@ interface CategoryQuestionProps {
   setcategoryQuestions: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const CategoryQuestion: React.FC<CategoryQuestionProps> = ({
-  idx,
-  val,
-  categoryQuestions,
-  setcategoryQuestions,
-}) => {
+const CategoryQuestion: React.FC<CategoryQuestionProps> = ({ idx }) => {
   const [question, setQuestion] = useState("");
   const [points, setPoints] = useState("");
   const [categories, setCategories] = useState([{ id: 1, name: "cat1" }]);
@@ -88,11 +83,11 @@ const CategoryQuestion: React.FC<CategoryQuestionProps> = ({
       </div>
 
       {/* Right Side: Add/Delete Buttons */}
-      <SideButtons
+      {/* <SideButtons
         index={idx}
         questionsLength={categoryQuestions}
         setQuestionsLength={setcategoryQuestions}
-      />
+      /> */}
     </div>
   );
 };

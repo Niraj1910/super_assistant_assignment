@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Container from "../Container";
 
 const Categorize = () => {
   const [categories, setCategories] = useState(["Category 1", "Category 2"]);
   const [items, setItems] = useState(["Item 1", "Item 2", "Item 3"]);
   const [assignments, setAssignments] = useState({});
+
+  // temperory will change later on
+  useCallback(() => {
+    setCategories(["Category 1", "Category 2"]);
+    setItems(["Item 1", "Item 2", "Item 3"]);
+  }, []);
 
   const handleDrop = (item: string, category: string) => {
     setAssignments((prev) => ({ ...prev, [item]: category }));

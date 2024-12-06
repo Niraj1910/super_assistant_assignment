@@ -43,7 +43,9 @@ const Comprehension = () => {
   ];
 
   // State for tracking the selected answer
-  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [selectedAnswers, setSelectedAnswers] = useState<{
+    [key: number]: number;
+  }>({});
   // State for tracking which question is expanded
   const [expandedQuestion, setExpandedQuestion] = useState<number | null>(null);
 
