@@ -5,12 +5,8 @@ const { Schema } = mongoose;
 const CategorizeQuestionSchema = new Schema({
   question: { type: String },
   points: { type: String },
-  categories: [
-    {
-      name: { type: String, required: true },
-      items: [{ type: String }], // Items to categorize
-    },
-  ],
+  categories: [{ type: String }],
+  items: [{ name: { type: String }, belongsTo: { type: String } }],
 });
 
 const CategorizeQuestion = mongoose.model(

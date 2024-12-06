@@ -2,14 +2,27 @@ import { FaSave } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { ComprehensionQuestionType } from "../../interfaces";
-import { saveComprehensionData } from "../../services/comprehensionService";
+import {
+  deleteComprehensionData,
+  saveComprehensionData,
+} from "../../services/comprehensionService";
 
 const SideButtons = ({
+  passage,
+  questions,
   passageId,
   comprehensionQuestions,
   setComprehensionQuestions,
 }: {
   passageId: string;
+  passage: string;
+  questions: {
+    correctAnswer: string;
+    text: string;
+    _id: string;
+    options: string[];
+    points: string;
+  }[];
   comprehensionQuestions: ComprehensionQuestionType | null;
   setComprehensionQuestions: React.Dispatch<
     React.SetStateAction<ComprehensionQuestionType | null>
@@ -18,8 +31,8 @@ const SideButtons = ({
   const handleSave = async () => {
     if (comprehensionQuestions) {
       try {
-        await saveComprehensionData(comprehensionQuestions);
-        alert("Comprehension saved!");
+        await saveComprehensionData(passageId, passage, questions);
+        // alert("Comprehension saved!");
       } catch (error) {
         console.error("Failed to save comprehension:", error);
       }
@@ -62,6 +75,7 @@ const SideButtons = ({
             }
             return updated;
           });
+          deleteComprehensionData(passageId);
         }}
         className="cursor-pointer hover:bg-purple-500 hover:text-white rounded-full"
       />

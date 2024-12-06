@@ -2,46 +2,44 @@ import React from "react";
 import Item from "./Item";
 
 const ItemsSection = ({
-  items,
-  setItems,
-  categories,
+  currCategory,
+  setCurrCategory,
   handleRemoveItem,
   handleAddItem,
 }: {
-  items: {
-    id: number;
-    name: string;
-    category: string;
-  }[];
-  setItems: (
-    value: React.SetStateAction<
-      {
-        id: number;
+  currCategory: {
+    _id: string;
+    question: string;
+    points: string;
+    categories: string[];
+    items: {
+      name: string;
+      belongsTo: string;
+    }[];
+  };
+  setCurrCategory: React.Dispatch<
+    React.SetStateAction<{
+      _id: string;
+      question: string;
+      points: string;
+      categories: string[];
+      items: {
         name: string;
-        category: string;
-      }[]
-    >
-  ) => void;
-  categories: {
-    id: number;
-    name: string;
-  }[];
-  handleRemoveItem: (id: number) => void;
-  handleAddItem: () => void;
+        belongsTo: string;
+      }[];
+    }>
+  >;
+  handleRemoveItem: (itemName: string, categoryName: string) => void;
+  handleAddItem: (itemName: string, categoryName: string) => void;
 }) => {
   const handleDrop = (
     draggedId: string | number,
     droppedId: string | number
   ) => {
-    const dragIndex = items.findIndex((item) => item.id === +draggedId);
-    const dropIndex = items.findIndex((item) => item.id === +droppedId);
-
-    if (dragIndex !== -1 && dropIndex !== -1 && dragIndex !== dropIndex) {
-      const updatedItems = [...items];
-      const [draggedItem] = updatedItems.splice(dragIndex, 1);
-      updatedItems.splice(dropIndex, 0, draggedItem);
-      setItems(updatedItems);
-    }
+    // Logic for handling drag and drop across items
+    console.log(draggedId, droppedId);
+    handleRemoveItem;
+    handleAddItem;
   };
 
   return (
@@ -53,18 +51,22 @@ const ItemsSection = ({
         </label>
       </div>
 
-      {items.map((item) => (
+      {currCategory.items.map((currItem) => (
         <Item
-          categories={categories}
+          currCategory={currCategory}
+          setCurrCategory={setCurrCategory}
           handleDrop={handleDrop}
-          handleRemoveItem={handleRemoveItem}
-          item={item}
-          items={items}
-          setItems={setItems}
+          currItem={currItem}
         />
       ))}
+
       <button
-        onClick={handleAddItem}
+        onClick={() =>
+          setCurrCategory({
+            ...currCategory,
+            items: [...currCategory.items, { name: "", belongsTo: "" }],
+          })
+        } // Example: adding to the first category
         className="mt-2 text-blue-500 hover:text-blue-700"
       >
         + Add Item

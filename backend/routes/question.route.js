@@ -2,6 +2,7 @@ import { Router } from "express";
 import { CategorizeQuestion } from "../models/question/categorizeQuestion.model.js";
 import {
   createQuestion,
+  deleteQuestion,
   getAllQuestions,
 } from "../controllers/question.controller.js";
 import { ComprehensionQuestion } from "../models/question/comprehenstionQuestion.model.js";
@@ -9,28 +10,33 @@ import { ClozeQuestion } from "../models/question/clozeQuestion.model.js";
 
 const router = Router();
 
-router.post("/category", (req, res) => {
-  createQuestion(req, res, CategorizeQuestion);
-});
+const routeHandler = (model) => {
+  return {
+    create: (req, res) => createQuestion(req, res, model),
+    getAll: (req, res) => getAllQuestions(req, res, model),
+    delete: (req, res) => deleteQuestion(req, res, model),
+  };
+};
 
-router.post("/cloze", (req, res) => {
-  createQuestion(req, res, ClozeQuestion);
-});
+// Routes for category
+const categoryHandler = routeHandler(CategorizeQuestion);
+router
+  .post("/category", categoryHandler.create)
+  .get("/category", categoryHandler.getAll)
+  .delete("/category/", categoryHandler.delete);
 
-router.post("/comprehension", (req, res) => {
-  createQuestion(req, res, ComprehensionQuestion);
-});
+//  Routes for Cloze
+const clozeHandler = routeHandler(ClozeQuestion);
+router
+  .post("/cloze", clozeHandler.create)
+  .get("/cloze", clozeHandler.getAll)
+  .delete("/cloze/", clozeHandler.delete);
 
-router.get("/category", (req, res) => {
-  getAllQuestions(req, res, CategorizeQuestion);
-});
-
-router.get("/cloze", (req, res) => {
-  getAllQuestions(req, res, ClozeQuestion);
-});
-
-router.get("/comprehension", (req, res) => {
-  getAllQuestions(req, res, ComprehensionQuestion);
-});
+// Routes for Comprehension
+const comprehensionHandler = routeHandler(ComprehensionQuestion);
+router
+  .post("/comprehension", comprehensionHandler.create)
+  .get("/comprehension", comprehensionHandler.getAll)
+  .delete("/comprehension/", comprehensionHandler.delete);
 
 export { router };

@@ -142,6 +142,8 @@ const ComprehensionQuestions: React.FC<ComprehensionProps> = ({
         </button>
       </div>
       <SideButtons
+        passage={passage}
+        questions={questions}
         comprehensionQuestions={comprehensionQuestion}
         setComprehensionQuestions={setComprehensionQuestions}
         passageId={comp._id}

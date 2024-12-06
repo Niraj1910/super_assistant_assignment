@@ -1,30 +1,28 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import QuestionTypeHeader from "./QuestionTypeHeader";
 import Container from "./Container";
 import CategoryQuestion from "./sub_components/CategoryQuestion";
 import useFetchQuestions from "../hooks/useFetchQuestions";
 import { CATEGORY } from "../constants";
-
-// interface categoryQuestionType{
-
-//   const [question, setQuestion] = useState("");
-//   const [points, setPoints] = useState("");
-//   const [categories, setCategories] = useState([{ id: 1, name: "cat1" }]);
-//   const [items, setItems] = useState([
-//     { id: 1, name: "ans1", category: "cat1" },
-//   ]);
-// }
+import { CategorizeQuestionType } from "../interfaces";
 
 const CategorizeCreate = () => {
-  const [categoryQuestions, setcategoryQuestions] = useState<number[]>([1]);
+  const [categoryQuestions, setCategoryQuestions] =
+    useState<CategorizeQuestionType | null>(null);
 
   const { data } = useFetchQuestions(CATEGORY);
-  console.log("category data -> ", data);
 
+  // Set category questions on data load
+  useMemo(() => {
+    if (data) {
+      setCategoryQuestions(data);
+    }
+  }, [data]);
+
+  // Handle preview and print data
   const handlePreview = () => {
-    // const data = { question, points, categories, items };
-    // console.log("Saved Question:", data);
-    alert("Question Saved!");
+    console.log("Categorize Questions Data:", categoryQuestions);
+    alert("Category Saved!");
   };
 
   return (
@@ -37,14 +35,17 @@ const CategorizeCreate = () => {
       />
 
       {/* Main Content: Left (Question Section) and Right (Add/Delete Buttons) */}
-      {categoryQuestions.map((val, idx) => (
-        <CategoryQuestion
-          categoryQuestions={categoryQuestions}
-          idx={idx}
-          setcategoryQuestions={setcategoryQuestions}
-          val={val}
-        />
-      ))}
+      {categoryQuestions &&
+        categoryQuestions.length > 0 &&
+        categoryQuestions.map((category, idx) => (
+          <CategoryQuestion
+            key={category._id}
+            category={category}
+            categoryQuestions={categoryQuestions}
+            setCategoryQuestions={setCategoryQuestions}
+            idx={idx}
+          />
+        ))}
     </Container>
   );
 };

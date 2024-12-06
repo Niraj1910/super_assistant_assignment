@@ -13,6 +13,21 @@ export const getAllQuestions = async (req, res, QuestionType) => {
   }
 };
 
+export const deleteQuestion = async (req, res, QuestionType) => {
+  try {
+    const { id } = req.body;
+    console.log("id -> ", id);
+    await QuestionType.findByIdAndDelete(id);
+
+    return res.status(200).json({ message: "deleted successfully" });
+  } catch (error) {
+    console.error("Error fetching questions:", error.message);
+    return res
+      .status(500)
+      .json({ message: "Failed to retrieve questions.", error: error });
+  }
+};
+
 export const createQuestion = async (req, res, QuestionType) => {
   try {
     const data = req.body;

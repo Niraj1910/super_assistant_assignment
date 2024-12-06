@@ -26,6 +26,15 @@ const Options = ({
   return (
     <div className="flex items-center gap-2 mb-2">
       <input
+        type="radio"
+        checked={q.correctAnswer === option}
+        onChange={() => {
+          const updatedQuestions = [...questions];
+          updatedQuestions[index].correctAnswer = option; // Set the selected option as the correct answer
+          setQuestions(updatedQuestions);
+        }}
+      />
+      <input
         type="text"
         value={option}
         onChange={(e) => {

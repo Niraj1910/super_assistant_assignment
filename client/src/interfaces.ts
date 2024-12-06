@@ -1,14 +1,20 @@
-export interface Category {
+// export interface Category {
+//   name: string;
+//   _id: string;
+//   items: string[];
+// }
+
+export interface Item {
   name: string;
-  _id: string;
-  items: string[];
+  belongsTo: string;
 }
 
-export type CategoryQuestionsType = {
+export type CategorizeQuestionType = {
   _id: string;
   question: string;
   points: string;
-  categories: Category[];
+  categories: string[];
+  items: Item[];
 }[];
 
 export type ClozeQuestionType = {

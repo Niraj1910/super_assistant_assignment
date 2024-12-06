@@ -1,42 +1,54 @@
+import React from "react";
+import { Item } from "../../interfaces";
+
 const CategoriesSection = ({
-  categories,
-  setCategories,
+  currCategory,
+  setCurrCategory,
   handleRemoveCategory,
   handleAddCategory,
 }: {
-  categories: {
-    id: number;
-    name: string;
-  }[];
-  setCategories: (
-    value: React.SetStateAction<
-      {
-        id: number;
-        name: string;
-      }[]
-    >
-  ) => void;
-  handleRemoveCategory: (id: number) => void;
+  currCategory: {
+    _id: string;
+    question: string;
+    points: string;
+    categories: string[];
+    items: Item[];
+  };
+  setCurrCategory: React.Dispatch<
+    React.SetStateAction<{
+      _id: string;
+      question: string;
+      points: string;
+      categories: string[];
+      items: Item[];
+    }>
+  >;
+  handleRemoveCategory: (id: string) => void;
   handleAddCategory: () => void;
 }) => {
+  const handleCategoryChange = (categoryName: string, newName: string) => {
+    setCurrCategory({
+      ...currCategory,
+      categories: currCategory.categories.filter((val) =>
+        val === categoryName ? newName : val
+      ),
+    });
+  };
+
   return (
     <div className="mb-4">
       <label className="block text-lg font-semibold mb-2">Categories</label>
-      {categories.map((category, index) => (
-        <div key={category.id} className="flex items-center mb-2">
+      {currCategory.categories.map((category) => (
+        <div key={category} className="flex items-center mb-2">
           <input
             type="text"
-            value={category.name}
-            onChange={(e) => {
-              const updatedCategories = [...categories];
-              updatedCategories[index].name = e.target.value;
-              setCategories(updatedCategories);
-            }}
-            placeholder={`Category ${index + 1}`}
+            value={category}
+            onChange={(e) => handleCategoryChange(category, e.target.value)}
+            placeholder="Category Name"
             className="flex-1 p-2 border rounded-md"
           />
           <button
-            onClick={() => handleRemoveCategory(category.id)}
+            onClick={() => handleRemoveCategory(category)}
             className="ml-2 text-red-500 hover:text-red-700"
           >
             ✖
