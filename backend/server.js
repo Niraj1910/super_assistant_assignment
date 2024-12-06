@@ -15,7 +15,7 @@ connectToDB(URI);
 
 app.use(
   cors({
-    origin: process.env.CLIENT_PROD_URL || process.env.CLIENT_DEV_URL,
+    origin: [process.env.CLIENT_PROD_URL, process.env.CLIENT_DEV_URL],
     methods: ["POST", "GET"],
   })
 );
